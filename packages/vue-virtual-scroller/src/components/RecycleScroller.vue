@@ -26,7 +26,7 @@
       <div
         v-for="view of pool"
         :key="view.nr.id"
-        :style="ready ? { transform: `translate${direction === 'vertical' ? 'Y' : 'X'}(${view.position}px)` } : null"
+        :style="ready ? { transform: `translate${direction === 'vertical' ? 'Y' : 'X'}(${view.position}px)`,...itemStyle(view.item,view.nr.index) } : null"
         class="vue-recycle-scroller__item-view"
         :class="{ hover: hoverKey === view.nr.key }"
         @mouseenter="hoverKey = view.nr.key"
@@ -111,6 +111,11 @@ export default {
     prerender: {
       type: Number,
       default: 0,
+    },
+
+    itemStyle:{
+      default:()=>()=>({}),
+      type:Function
     },
 
     emitUpdate: {
